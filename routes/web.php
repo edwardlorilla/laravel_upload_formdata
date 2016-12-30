@@ -12,14 +12,15 @@
 */
 
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('submit', function () {
-    foreach (Input::file('image') as $image) {
+Route::post('submit', function (Request $request) {
+    foreach ( $request-> file('image') as $image) {
         $imagename = time() . $image->getClientOriginalName();
         $uploadFile = $image->move('public/uploads', $imagename);
         if ($uploadFile) {

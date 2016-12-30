@@ -73,29 +73,44 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div id="example"  class="content">
+                @{{ message }}
                 <div class="title m-b-md">
-                    <form action="" enctype="multipart/form-data">
+                    <form @submit.prevent = "submit"  action="" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
+                        <input type="text" name="names">
                         <input type="text" name="name">
-                        <input type="file" name="image[]">
-                        <button type=""submit">Submit</fbutton>}}
+                        <input type="file" name="image" >
+                        <button type="submit">Submit</button>
                     </form>
 
                 </div>
 
             </div>
         </div>
+        <script src="{{URL::to('js/vue.js')}}"></script>
         <script>
-            var form = document.querySelector('form');
-            var request = new XMLHttpRequest();
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                var formdata = new FormData(form);
-                request.open('post', '{{route('submit')}}');
-                request.send(formdata);
-            },false);
+
+            new Vue({
+                el: '#example',
+                data: {
+                    message: 'working...'
+                },
+                methods:{
+                    submit:function () {
+                        var form = document.querySelector('form');
+                        var request = new XMLHttpRequest();
+
+
+                            var formdata = new FormData(form);
+                            request.open('post', '{{route('submit')}}');
+                            request.send(formdata);
+                    }
+                }
+            })
+
+
         </script>
     </body>
 </html>
