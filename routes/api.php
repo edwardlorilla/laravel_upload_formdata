@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -16,3 +17,11 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::post('/destroy', function (Request $request) {
+    if ($request->id) {
+        foreach ($request->id as $id) {
+            User::destroy($id);
+        }
+    }
+})->name('destroy');

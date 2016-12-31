@@ -20,13 +20,15 @@ Route::get('/', function () {
 });
 
 Route::post('submit', function (Request $request) {
-    foreach ( $request-> file('image') as $image) {
-        $imagename = time() . $image->getClientOriginalName();
-        $uploadFile = $image->move('public/uploads', $imagename);
-        if ($uploadFile) {
-            $uploadedImage[] = $imagename;
-        }
-    }
-    return response()->json(['success' => true, 'message' => 'images uploaded']);
-
+//    foreach ( $request-> file('image') as $image) {
+//        $imagename = time() . $image->getClientOriginalName();
+//        $uploadFile = $image->move('public/uploads', $imagename);
+//        if ($uploadFile) {
+//            $uploadedImage[] = $imagename;
+//        }
+//    }
+//    return response()->json(['success' => true, 'message' => 'images uploaded']);
+dd($request);
 })->name('submit');
+
+Route::resource('users', 'UsersController');
