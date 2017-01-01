@@ -1,15 +1,20 @@
 <html lang="en">
 <head>
-    <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>
+    <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
     <meta name="_token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="css/app.css">
     <title>Laravel 5.3 with Vuejs</title>
 </head>
 <body>
-<div class="container" id="app">
 
-    <tasks></tasks>
+
+
+<div  id="app">
+    <example></example>
 </div>
-<script src="js/app.js"></script>
+
+
+</div>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
