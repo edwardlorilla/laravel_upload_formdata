@@ -1,11 +1,9 @@
 <template>
     <div>
-        <div>this is template body</div>
+        <div>Create User</div>
     </div>
 </template>
-
 <script>
-
     export default{
         data(){
             return{

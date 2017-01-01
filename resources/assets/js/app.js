@@ -11,6 +11,7 @@ require('./bootstrap');
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
+
 var Vue = require('vue')
 var VueRouter = require('vue-router');
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
@@ -20,26 +21,24 @@ import Tasks from './components/Tasks.vue';
 import Create from './components/Create.vue';
 import template from './components/initials/template.vue'
 import Example from './components/Example.vue';
+
 const UserTask = Tasks
 const UserCreate = Create
-
 Vue.component('example', require('./components/Example.vue'))
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        {
-            path: '/users/:id', component: template,
-            children: [
-                {path: '/create', component: UserCreate},
-
-            ]
-        },
+                {
+                    path: '/users/:id', component: template,
+                    children:
+                        [
+                            {path: 'create', component: UserCreate},
+                        ]
+                },
         {path: '', component: UserTask},
-
-
     ]
 })
 
 
-new Vue(Vue.util.extend({ router }, Example )).$mount('#app')
+new Vue(Vue.util.extend({router}, Example)).$mount('#app')
