@@ -61,7 +61,7 @@
     methods: {
         fetchTaskList: function()
         {
-            this.$http.get('users').then(function (response) {
+            this.$http.get('api/users').then(function (response) {
             this.list = response.data
             });
         },

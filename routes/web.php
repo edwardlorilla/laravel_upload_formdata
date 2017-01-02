@@ -12,6 +12,8 @@
 */
 
 
+use App\Photo;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -20,15 +22,23 @@ Route::get('/', function () {
 });
 
 Route::post('submit', function (Request $request) {
-//    foreach ( $request-> file('image') as $image) {
-//        $imagename = time() . $image->getClientOriginalName();
-//        $uploadFile = $image->move('public/uploads', $imagename);
-//        if ($uploadFile) {
-//            $uploadedImage[] = $imagename;
-//        }
-//    }
-//    return response()->json(['success' => true, 'message' => 'images uploaded']);
-dd($request);
+    $input = $request->all();
+    if (trim($request->password) == '') {
+        $input = $request->except('password');
+    } else {
+        $input = $request->all();
+    }
+    if ($file = $request->file('image')) {
+        $name = time() . $file->getClientOriginalName();
+        $file->move('images', $name);
+        $photo = Photo::create(['file' => $name]);
+        $input['photo_id'] = $photo->id;
+    }
+    $input['password'] = bcrypt($request->password);
+    User::create($input);
+    return response()->json(['success' => true, 'message' => 'images uploaded']);
+
+
 })->name('submit');
 
 Route::resource('users', 'UsersController');

@@ -21,23 +21,19 @@ import Tasks from './components/Tasks.vue';
 import Create from './components/Create.vue';
 import template from './components/initials/template.vue'
 import Example from './components/Example.vue';
-
+import NotFoundComponent from './components/NotFoundComponent.vue';
 const UserTask = Tasks
 const UserCreate = Create
 Vue.component('example', require('./components/Example.vue'))
 
 const router = new VueRouter({
     mode: 'history',
+    base: __dirname,
     routes: [
-                {
-                    path: '/users/:id', component: template,
-                    children:
-                        [
-                            {path: 'create', component: UserCreate},
-                        ]
-                },
-        {path: '', component: UserTask},
-    ]
+             {path: '/create', component: UserCreate},
+             {path: '', component: UserTask},
+             { path: '*', component: NotFoundComponent }
+            ]
 })
 
 

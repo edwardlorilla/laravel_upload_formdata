@@ -14,9 +14,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
+Route::get('user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::get('users', function (Request $request) {
+    return User::latest()->orderBy('created_at', 'desc')->get();
+});
 
 Route::post('/destroy', function (Request $request) {
     if ($request->id) {
