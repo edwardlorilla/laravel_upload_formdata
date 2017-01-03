@@ -27,14 +27,15 @@ const UserCreate = Create
 Vue.component('example', require('./components/Example.vue'))
 
 const router = new VueRouter({
-    mode: 'history',
+    hashbang: false,
     base: __dirname,
+    linkActiveClass: 'active',
     routes: [
-             {path: '/create', component: UserCreate},
-             {path: '', component: UserTask},
-             { path: '*', component: NotFoundComponent }
+                { path: '/', component: UserTask },
+                { path: '/foo', component: UserCreate }
             ]
 })
+
 
 
 new Vue(Vue.util.extend({router}, Example)).$mount('#app')

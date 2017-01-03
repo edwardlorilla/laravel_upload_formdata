@@ -8,6 +8,7 @@
                 <th><input type="checkbox"></th>
                 <th>firstName</th>
                 <th>Email</th>
+                <th></th>
             </tr>
             </thead>
             <tbody name="fade" is="transition-group">
@@ -16,6 +17,7 @@
                     <td><input type="checkbox" @click="task.completed = !task.completed" :value = "task.id" v-model = "checkedNames"></td>
                     <td>{{task.name}}</td>
                     <td>{{task.email}}</td>
+                    <td> <img :src="task.photo ? task.photo.file : '/images/default-profile.png' " /></td>
                 </tr>
 
 
@@ -42,7 +44,10 @@
              task: {
                  name: '',
                  email: '',
-                 completed: false
+                 completed: false,
+                 photo:{
+                    file: ''
+                 }
              },
              filters: {
                  notDone: function(todo) {
@@ -62,6 +67,7 @@
         fetchTaskList: function()
         {
             this.$http.get('api/users').then(function (response) {
+            console.log(response.data);
             this.list = response.data
             });
         },

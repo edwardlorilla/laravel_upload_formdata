@@ -14,16 +14,15 @@
             <div class="form-group">
                 <div v-if="!image">
                     <h2>Select an image</h2>
-                    <input name="image" type="file" @change="onFileChange">
                     </div>
                 <div v-else>
                     <img :src="image" />
-                    <input name="image" type="file" @change="onFileChange">
                     <button @click="removeImage">Remove image</button>
-                    </div>
                 </div>
+                <input name="image" type="file" @change="onFileChange">
+            </div>
             <button class="btn btn-primary" type="submit">Add User</button>
-            </form>
+        </form>
     </div>
 </template>
 <style>

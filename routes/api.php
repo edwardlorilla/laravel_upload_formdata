@@ -19,9 +19,8 @@ Route::get('user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('users', function (Request $request) {
-    return User::latest()->orderBy('created_at', 'desc')->get();
+    return User::with('photo')->latest()->orderBy('created_at', 'desc')->get();
 });
-
 Route::post('/destroy', function (Request $request) {
     if ($request->id) {
         foreach ($request->id as $id) {
